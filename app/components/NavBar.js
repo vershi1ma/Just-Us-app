@@ -9,6 +9,7 @@ const tabs = [
   { href: '/goals', label: 'Goals', icon: '🎯' },
   { href: '/notes', label: 'Notes', icon: '💌' },
   { href: '/memories', label: 'Memories', icon: '📸' },
+  { href: '/reminders', label: 'Reminders', icon: '⏰' },
 ]
 
 export default function NavBar() {
