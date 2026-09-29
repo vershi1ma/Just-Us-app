@@ -29,7 +29,7 @@ export default function NavBar() {
               : 'flex flex-col items-center text-plum opacity-60'
           }
         >
-          <span className="text-xl">{tab.icon}</span>
+          <span className="text-3xl">{tab.icon}</span>
           <span className="text-xs">{tab.label}</span>
         </Link>
       ))}

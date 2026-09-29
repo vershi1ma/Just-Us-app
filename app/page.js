@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../lib/supabase'
+import { displayName } from './lib/names'
 
 export default function Home() {
   const [session, setSession] = useState(null)
@@ -30,7 +31,9 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-8">
       <h1 className="text-4xl font-bold text-rose mb-4">Just Us</h1>
-      <p className="text-plum mb-6">Welcome back, {session?.user?.email} 💕</p>
+      <p className="text-plum mb-6">
+        Welcome back, {displayName(session?.user?.email)} 💕
+      </p>
       <button onClick={handleLogout} className="text-plum underline">
         Log out
       </button>
