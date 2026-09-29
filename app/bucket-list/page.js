@@ -3,11 +3,14 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
+import { displayName } from '../lib/names'
 
 export default function BucketList() {
   const [items, setItems] = useState([])
   const [text, setText] = useState('')
   const [user, setUser] = useState(null)
+  const [editingId, setEditingId] = useState(null)
+  const [editText, setEditText] = useState('')
   const router = useRouter()
 
   async function loadItems() {
@@ -52,6 +55,18 @@ export default function BucketList() {
     loadItems()
   }
 
+  function startEdit(item) {
+    setEditingId(item.id)
+    setEditText(item.item)
+  }
+
+  async function saveEdit(id) {
+    if (!editText.trim()) return
+    await supabase.from('bucket_list').update({ item: editText.trim() }).eq('id', id)
+    setEditingId(null)
+    loadItems()
+  }
+
   return (
     <main className="min-h-screen p-8 max-w-md mx-auto">
       <h1 className="text-3xl font-bold text-rose mb-6">Our Bucket List</h1>
@@ -74,10 +89,27 @@ export default function BucketList() {
               checked={item.is_done}
               onChange={() => toggle(item)}
             />
-            <div className="flex-1">
-              <p className={item.is_done ? 'line-through opacity-50' : ''}>{item.item}</p>
-              <p className="text-xs opacity-60">added by {item.added_by}</p>
-            </div>
+            {editingId === item.id ? (
+              <div className="flex-1 flex gap-2">
+                <input
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                  className="flex-1 p-2 rounded-lg border border-rose text-sm"
+                  autoFocus
+                />
+                <button onClick={() => saveEdit(item.id)} className="text-sm text-rose font-bold">
+                  Save
+                </button>
+                <button onClick={() => setEditingId(null)} className="text-sm opacity-60">
+                  Cancel
+                </button>
+              </div>
+            ) : (
+              <div className="flex-1" onClick={() => startEdit(item)}>
+                <p className={item.is_done ? 'line-through opacity-50' : ''}>{item.item}</p>
+                <p className="text-xs opacity-60">added by {displayName(item.added_by)}</p>
+              </div>
+            )}
             <button onClick={() => remove(item.id)} className="text-sm opacity-60">
               ✕
             </button>

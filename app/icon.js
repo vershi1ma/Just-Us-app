@@ -10,16 +10,14 @@ export default function Icon() {
         style={{
           width: '100%',
           height: '100%',
-          background: '#d68fa3',
+          background: '#f5e6ea',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: 'white',
-          fontSize: 240,
-          fontWeight: 700,
+          fontSize: 340,
         }}
       >
-        JU
+        ❤️
       </div>
     ),
     { ...size }

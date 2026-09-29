@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '../../lib/supabase'
+import { displayName } from '../lib/names'
 
 export default function Notes() {
   const [notes, setNotes] = useState([])
@@ -74,7 +75,7 @@ export default function Notes() {
               <p className="whitespace-pre-wrap">{note.body}</p>
               <div className="flex justify-between items-center mt-2 text-xs opacity-60">
                 <span>
-                  {mine ? 'You' : note.author} ·{' '}
+                  {mine ? 'You' : displayName(note.author)} ·{' '}
                   {new Date(note.created_at).toLocaleDateString()}
                 </span>
                 {mine && (
