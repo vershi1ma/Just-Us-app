@@ -13,6 +13,10 @@ export default function Login() {
   async function handleLogin(e) {
     e.preventDefault()
     setError('')
+    if (!navigator.onLine) {
+      setError("You're offline — connect to the internet to log in")
+      return
+    }
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) {
       setError('Wrong email or password')
