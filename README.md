@@ -1,6 +1,6 @@
 # Just Us
 
-A private, shared space for two — built from a single text message into a working app.
+A private, shared space for two. Started as an idea from a text message and built into a working app.
 
 ## What it does
 
