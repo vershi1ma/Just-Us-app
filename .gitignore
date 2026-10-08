@@ -1,0 +1,15 @@
+# secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# dependencies and build output
+node_modules/
+.next/
+out/
+.vercel/
+
+# system files
+.DS_Store
