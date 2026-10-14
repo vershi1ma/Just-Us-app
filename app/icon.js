@@ -17,7 +17,7 @@ export default function Icon() {
           fontSize: 340,
         }}
       >
-        ❤️
+       💙
       </div>
     ),
     { ...size }
